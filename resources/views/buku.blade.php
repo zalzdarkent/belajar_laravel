@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Buku</title>
-</head>
-<body>
-    <h1>Daftar Buku</h1>
-    <ul>
-        @foreach ($buku as $item)
-            <li>{{ $item->judul }} oleh {{ $item->pengarang }}</li>
-        @endforeach
-    </ul>
-</body>
-</html>
+@extends('app')
+
+@section('content')
+    <h1>Welcome to the Buku Page</h1>
+    <div>
+        <a href="{{route('buku.tambah')}}"><button>Tambah Buku</button></a>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Judul</th>
+                <th>Pengarang</th>
+                <th>Tahun Terbit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($buku as $item)
+                <tr>
+                    <td>{{ $item->judul }}</td>
+                    <td>{{ $item->pengarang }}</td>
+                    <td>{{ $item->penerbit }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endsection
