@@ -1,8 +1,8 @@
 @extends('app')
 
 @section('content')
-    <h1>Welcome to the Tambah Buku Page</h1>
-    <form action="{{route('buku.simpan')}}" method="post">
+    <h1>Welcome to Tambah Buku page</h1>
+    <form action="/simpan-buku" method="post">
         @csrf
         <div>
             <label for="">Judul</label>

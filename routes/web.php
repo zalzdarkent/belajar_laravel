@@ -5,14 +5,16 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/about', function () {
-    return view('about');
+    return view('app');
 });
 
-Route::get('/home', [HomeController::class, 'home']);
-Route::get('/buku', [BukuController::class, 'index'])->name('buku');
-Route::get('buku/tambah', [BukuController::class, 'create'])->name('buku.tambah');
-Route::post('buku/store', [BukuController::class, 'store'])->name('buku.simpan');
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/buku', [BukuController::class, 'index']);
+Route::get('/tambah-buku', [BukuController::class, 'create']);
+Route::post('/simpan-buku', [BukuController::class, 'store']);
+Route::get('/edit-buku/{id}', [BukuController::class, 'edit']); 
+Route::put('/update-buku/{id}', [BukuController::class, 'update']);
+Route::delete('/hapus-buku/{id}', [BukuController::class, 'destroy']);

@@ -1,4 +1,6 @@
 <nav>
-    <li><a href="{{ route('home') }}">Home</a></li>
-    <li><a href="{{ route('buku') }}">Buku</a></li>
+    <ul>
+        <a href="/home"><li>Home</li></a>
+        <a href="/buku"><li>Buku</li></a>
+    </ul>
 </nav>

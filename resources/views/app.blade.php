@@ -8,8 +8,8 @@
 </head>
 <body>
     @include('navbar')
+
     <main>
-        {{-- content --}}
         @yield('content')
     </main>
 </body>

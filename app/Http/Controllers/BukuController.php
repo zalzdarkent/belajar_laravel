@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
-    public function index()
-    {
-        $buku = Buku::all();
-        return view('buku', compact('buku'));
+    public function index(){
+        $data = Buku::all();
+        return view('buku', compact('data'));
     }
 
     public function create(){
@@ -18,13 +17,34 @@ class BukuController extends Controller
     }
 
     public function store(Request $request){
-        $validasiData = $request->validate([
-            'judul' => 'required|max:255',
-            'pengarang' => 'required|max:255',
-            'penerbit' => 'required|max:255',
+        $validasi = $request->validate([
+            'judul' => 'required|string|max:255',
+            'pengarang' => 'required|string|max:255',
+            'penerbit' => 'required|string|max:255',
         ]);
 
-        Buku::create($validasiData);
-        return redirect('buku');
+        Buku::create($validasi);
+        return redirect('/buku');
+    }
+
+    public function edit($id) {
+        $buku = Buku::find($id);
+        return view('edit-buku', compact('buku'));
+    }
+
+    public function update(Request $request, $id) {
+        $validasi = $request->validate([
+            'judul' => 'required|string|sometimes|max:255',
+            'pengarang' => 'required|string|sometimes|max:255',
+            'penerbit' => 'required|string|sometimes|max:255',
+        ]);
+
+        Buku::where('id', $id)->update($validasi);
+        return redirect('/buku');
+    }
+
+    public function destroy($id) {
+        Buku::destroy($id);
+        return redirect('/buku');
     }
 }
