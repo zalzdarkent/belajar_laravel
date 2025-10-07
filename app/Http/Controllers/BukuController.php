@@ -9,11 +9,11 @@ class BukuController extends Controller
 {
     public function index(){
         $data = Buku::all();
-        return view('buku', compact('data'));
+        return view('pages.buku', compact('data'));
     }
 
     public function create(){
-        return view('tambah-buku');
+        return view('pages.tambah-buku');
     }
 
     public function store(Request $request){
@@ -29,7 +29,7 @@ class BukuController extends Controller
 
     public function edit($id) {
         $buku = Buku::find($id);
-        return view('edit-buku', compact('buku'));
+        return view('pages.edit-buku', compact('buku'));
     }
 
     public function update(Request $request, $id) {
