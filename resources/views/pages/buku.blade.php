@@ -11,18 +11,20 @@
                 <th>Judul</th>
                 <th>Pengarang</th>
                 <th>Penerbit</th>
+                <th>Kategori</th>
                 <th>Opsi</th>
             </tr>
         </thead>
         <tbody>
             @if ($data == 'null')
-                <td>Tidak ada data</td>
+                <td colspan="5">Tidak ada data</td>
             @else
                 @foreach ($data as $buku)
                     <tr>
                         <td>{{ $buku->judul }}</td>
                         <td>{{ $buku->pengarang }}</td>
                         <td>{{ $buku->penerbit }}</td>
+                        <td>{{ $buku->kategoriBuku ? $buku->kategoriBuku->nama_kategori : 'Tidak ada kategori' }}</td>
                         <td>
                             <a href="/edit-buku/{{ $buku->id }}"><button>Edit</button></a>
                             <form action="/hapus-buku/{{ $buku->id }}" method="post" style="display:inline;"

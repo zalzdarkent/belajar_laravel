@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
+use App\Models\KategoriBuku;
 use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
     public function index(){
-        $data = Buku::all();
+        $data = Buku::with('kategoriBuku')->get();
         return view('pages.buku', compact('data'));
     }
 
     public function create(){
-        return view('pages.tambah-buku');
+        $kategoriBuku = KategoriBuku::all();
+        return view('pages.tambah-buku', compact('kategoriBuku'));
     }
 
     public function store(Request $request){
@@ -21,6 +23,7 @@ class BukuController extends Controller
             'judul' => 'required|string|max:255',
             'pengarang' => 'required|string|max:255',
             'penerbit' => 'required|string|max:255',
+            'kategori_buku_id' => 'required|exists:kategori_buku,id',
         ]);
 
         Buku::create($validasi);
@@ -29,7 +32,8 @@ class BukuController extends Controller
 
     public function edit($id) {
         $buku = Buku::find($id);
-        return view('pages.edit-buku', compact('buku'));
+        $kategoriBuku = KategoriBuku::all();
+        return view('pages.edit-buku', compact('buku', 'kategoriBuku'));
     }
 
     public function update(Request $request, $id) {
@@ -37,6 +41,7 @@ class BukuController extends Controller
             'judul' => 'required|string|sometimes|max:255',
             'pengarang' => 'required|string|sometimes|max:255',
             'penerbit' => 'required|string|sometimes|max:255',
+            'kategori_buku_id' => 'required|exists:kategori_buku,id',
         ]);
 
         Buku::where('id', $id)->update($validasi);
